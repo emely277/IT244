@@ -1,0 +1,43 @@
+#!/bin/bash
+
+TICKET_FILE="tickets.txt"
+
+while true
+do
+    echo "===== Ticketing System ====="
+    echo "1. Submit a ticket"
+    echo "2. Search tickets"
+    echo "3. View all tickets"
+    echo "4. Exit"
+    echo "Choose an option:"
+    read choice
+
+    if [ "$choice" = "1" ]; then
+        echo "Enter your name:"
+        read name
+
+        echo "Enter ticket issue:"
+        read issue
+
+        echo "$(date) | Name: $name | Issue: $issue" >> $TICKET_FILE
+        echo "Ticket saved."
+
+    elif [ "$choice" = "2" ]; then
+        echo "Enter a word to search:"
+        read search
+
+        grep -i "$search" $TICKET_FILE
+
+    elif [ "$choice" = "3" ]; then
+        cat $TICKET_FILE
+
+    elif [ "$choice" = "4" ]; then
+        echo "Goodbye."
+        exit
+
+    else
+        echo "Invalid option."
+    fi
+
+    echo ""
+done
